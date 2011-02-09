@@ -1,7 +1,7 @@
 GXPlugins
 ==========
 
-This project contains the core dsp code from the [Guitarix Project](http://guitarix.sourceforge.net/) that is written in the Faust programming language [Faust Programming Language](http://faust.grame.fr/). 
+This project contains the core dsp code from the [Guitarix Project](http://guitarix.sourceforge.net/) that is written in the [Faust Programming Language](http://faust.grame.fr/). 
 
 Since it is possible to compile Faust code for several kinds of systems or standalone applications, the GXPlugins project tries to make a SuperCollider DSP Plugins out of each Guitarix effect module.
 
