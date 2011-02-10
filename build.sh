@@ -18,3 +18,4 @@ ls *.dsp | ./scbuilder \
 
 rm ./GXPlugins/valve.h
 rm ./GXPlugins/*.cc
+

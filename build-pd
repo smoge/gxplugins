@@ -1,0 +1,13 @@
+#!/bin/bash
+
+rm -rf pd
+mkdir pd
+cp *.{dsp,lib,cc,h} ./pd
+cd pd
+
+for file in *.dsp; do
+	faust2puredata $file -o ./pd/$file
+done
+
+rm *.{dsp,lib,cc,h}
+cd ..

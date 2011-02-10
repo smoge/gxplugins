@@ -2,20 +2,12 @@
 
 rm -rf jack
 mkdir jack
-cp *.dsp ./jack
+cp *.{dsp,lib,cc,h} ./jack
 cd jack
 
 for file in *.dsp; do
 	faust2jack $file -o ./jack/$file
 done
 
-rm *.dsp
+rm *.{dsp,lib,cc,h}
 cd ..
-
-# ########
-# rm -rf pd
-# mkdir pd
-# 
-# for file in *.dsp; do
-# 	faust2pd $file -o ./pd/$file
-# done
