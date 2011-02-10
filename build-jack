@@ -1,0 +1,21 @@
+#!/bin/bash
+
+rm -rf jack
+mkdir jack
+cp *.dsp ./jack
+cd jack
+
+for file in *.dsp; do
+	faust2jack $file -o ./jack/$file
+done
+
+rm *.dsp
+cd ..
+
+# ########
+# rm -rf pd
+# mkdir pd
+# 
+# for file in *.dsp; do
+# 	faust2pd $file -o ./pd/$file
+# done
