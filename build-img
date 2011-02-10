@@ -1,0 +1,13 @@
+#!/bin/bash
+
+rm -rf img
+mkdir img
+cp *.{dsp,lib,cc,h} ./img
+cd img
+
+for file in *.dsp; do
+    faust2pdf $file
+done
+
+rm *.{dsp,lib,cc,h}
+cd ..
