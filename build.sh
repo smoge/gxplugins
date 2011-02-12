@@ -3,20 +3,27 @@
 usage()
 {
 cat << EOF
+
+
 usage: $0 -s [-p]
 
 OPTIONS:
 -h|--help	Print this help
 -s|--scdir	Path to SuperCollider source directory
 -p|--prefix	Installation prefix (/usr/local)
+
+
 EOF
 }
 
+# variables
 SCDIR=""
 PREFIX="/usr/local"
+FAUST2SC=""
 
+# command-line arguments
 while [[ $1 == -* ]]; do
-    case "$1" in
+    case "${1}" in
       -h|--help|-\?) usage; exit 0;;
       -s|--scdir) if (($# > 1)); then
             SCDIR=$2; shift 2
@@ -34,11 +41,16 @@ while [[ $1 == -* ]]; do
     esac
 done
 
+# -s|--scdir is required
+if [[ -z "${SCDIR}" ]]; then
+    echo "Error: you didn't specify your SC source directory" >&2;
+	usage; exit 1;
+fi
 
-if [[ -z "$SCDIR" ]]
-then
-    echo "ERROR: you didn't specify your SC source directory"
-	usage; exit 0;
+# faust2sc is required
+FAUST2SC=`type -p faust2pd`
+if [ "${FAUST2SC}" == "" ]; then
+	echo "Error: faust2sc is not found.">&2; exit 1;
 fi
 
 
