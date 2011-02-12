@@ -6,6 +6,7 @@ cat << EOF
 usage: $0 -s [-p]
 
 OPTIONS:
+-h|--help	Print this help
 -s|--scdir	Path to SuperCollider source directory
 -p|--prefix	Installation prefix (/usr/local)
 EOF
