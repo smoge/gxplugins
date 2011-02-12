@@ -10,14 +10,15 @@ Compilation
 
 To compile this plugins you have to have SuperCollider and Faust installed. You will also need the faust2sc programm. If your distribution does not provide this programm, install it looking at the /tools folder in the Faust source code.
 
-Edit the build.sh script and make sure `SC_SOURCE_DIR=` is set to your SuperCollider-Source/common folder. Also check if `FAUST2SC=` is correctly set.
+Edit the build.sh script and make sure `FAUST2SC=` is correctly set.
 
 If everything is right, you can install like this:
 
-    git clone git://github.com/smoge/gxplugins.git
+    git clone git://github.com/gusano/gxplugins.git
     cd gxplugins
-    ./build.sh
+    ./build.sh -s /PATH/TO/SC_SOURCEDIR
 
+(optional: -p INSTALL_PREFIX, default is /usr/local)
 
 The generated files will be placed in the GXPlugins folder. 
 
