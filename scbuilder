@@ -101,7 +101,7 @@ elif PLATFORM == 'freebsd':
 elif PLATFORM == 'linux':
     PLATFORM_SYMBOL = 'SC_LINUX'
     PLUGIN_EXT = '.so'
-    DEFAULT_PREFIX = '/usr'
+    DEFAULT_PREFIX = '/usr/local'
 elif PLATFORM == 'windows':
     PLATFORM_SYMBOL = 'SC_WIN32'
     PLUGIN_EXT = '.scx'
@@ -319,7 +319,7 @@ if PLATFORM == 'darwin':
                    'Architectures to build for',
                    'all', ['ppc', 'i386'])
     )
-    
+
 # ======================================================================
 # basic environment
 # ======================================================================
@@ -352,6 +352,35 @@ FINAL_PREFIX = '$PREFIX'
 INSTALL_PREFIX = os.path.join('$DESTDIR', '$PREFIX')
 
 # ======================================================================
+# Work out the SuperCollider version (this effects the sourcecode layout)
+# (thanks Jonny Stutters)
+# ======================================================================
+
+print "Attempting to detect SuperCollider version..."
+version_classvar = None
+try:
+	version_file = open(env['SC_SOURCE_DIR'] + "/VERSION", 'r')
+	version_string = version_file.readline().rstrip()
+	version_classvar = version_file.readline().rstrip()
+	version_file.close()
+except IOError:
+	sc_version = 3.4
+	print "Failed to detect SuperCollider version, assuming it's < 3.5"
+
+if version_classvar:
+	pattern = "^(classvar scVersionMajor=)([0-9]*)(, scVersionMinor=)([0-9]*)(.*)"
+	r = re.search(pattern, version_classvar)
+	sc_version = 0.0
+	sc_version = float(r.group(2))
+	sc_version += float(r.group(4)) * 0.1
+	print "It looks like you have version {0}".format(sc_version)
+
+if sc_version >= 3.5:
+	INCLUDEDIR = 'include/'
+else:
+	INCLUDEDIR = 'Headers/'
+
+# ======================================================================
 # configuration
 # ======================================================================
 
@@ -382,11 +411,13 @@ if isDefaultBuild():
     else:
         src_dir = env['SC_SOURCE_DIR']
         if os.path.isdir(src_dir):
+            src_dir = os.path.join(src_dir, INCLUDEDIR)
             libraries['scplugin'] = Environment(
                                         CPPDEFINES = [PLATFORM_SYMBOL],
-                                        CPPPATH = [os.path.join(src_dir, 'Headers/common'),
-                                                   os.path.join(src_dir, 'Headers/plugin_interface'),
-                                                   os.path.join(src_dir, 'Headers/server')])
+                                        CPPPATH = [os.path.join(src_dir, 'common'),
+                                                   os.path.join(src_dir, 'plugin_interface'),
+                                                   os.path.join(src_dir, 'server')])
+
         else:
             print "Please specify the SC_SOURCE_DIR option."
             Exit(1)
