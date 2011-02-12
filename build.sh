@@ -48,7 +48,7 @@ if [[ -z "${SCDIR}" ]]; then
 fi
 
 # faust2sc is required
-FAUST2SC=`type -p faust2sc` || { echo "Error: faust2sc is not found.">&2; exit 1;
+FAUST2SC=`type -p faust2sc` || { echo "Error: faust2sc is not found.">&2; exit 1; }
 
 
 rm -rf {gx_sc,GXPlugins}
