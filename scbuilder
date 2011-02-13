@@ -376,9 +376,9 @@ if version_classvar:
 	print "It looks like you have version {0}".format(sc_version)
 
 if sc_version >= 3.5:
-	INCLUDEDIR = 'include/'
+	INCLUDEDIR = 'include'
 else:
-	INCLUDEDIR = 'Headers/'
+	INCLUDEDIR = 'Headers'
 
 # ======================================================================
 # configuration
