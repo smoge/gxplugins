@@ -14,7 +14,7 @@ Edit the build.sh script and make sure `FAUST2SC=` is correctly set.
 
 If everything is right, you can install like this:
 
-    git clone git://github.com/gusano/gxplugins.git
+    git clone git://github.com/smoge/gxplugins.git
     cd gxplugins
     ./build.sh -s /PATH/TO/SC_SOURCEDIR
 
