@@ -19,7 +19,7 @@ EOF
 # variables
 SCDIR=""
 PREFIX="/usr/local"
-FAUST2SC=""
+FAUST_SC=""
 
 # command-line arguments
 while [[ $1 == -* ]]; do
@@ -48,8 +48,7 @@ if [[ -z "${SCDIR}" ]]; then
 fi
 
 # faust2sc is required
-FAUST2SC=`type -p faust2sc` || { echo "Error: faust2sc is not found.">&2; exit 1; }
-
+FAUST_SC=`type -p faust2sc` || { echo "Error: faust2sc is not found.">&2; exit 1; }
 
 rm -rf {gx_sc,GXPlugins}
 mkdir -p {GXPlugins,gx_sc,gx,pkgdir}
@@ -58,7 +57,7 @@ cp ./valve.h *.cc ./GXPlugins
 
 
 ls *.dsp | ./scbuilder \
-	FAUST2SC=/usr/bin/faust2sc \
+	FAUST2SC=$FAUST_SC \
 	FAUST2SC_PREFIX="GX" \
 	BUILD_SC=yes \
 	BUILD_XML=no \
